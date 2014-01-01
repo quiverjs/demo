@@ -30,6 +30,12 @@ $ quiver-command . --config config.json --user_id john
 
 The user_id john can be replaced with any user in the mock user entries specified in the config. Since the command accepts input from STDIN, the user may type in anything and then press `Ctrl+D` to finishe the input.
 
+The script itself can also act as command line tool if it detect itself running as main. So the same command can also be run as follow:
+
+```bash
+$ node . --config config.json --user_id john
+```
+
 Alternatively a simple shell script is provided to run the demo simply as
 
 ```bash
