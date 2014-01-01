@@ -9,11 +9,11 @@ var getUserHandlerBuilder = function(config, callback) {
   var handler = function(args, callback) {
     var userId = args.user_id
 
-    database.query('SELECT * FROM user WHERE user_id=$1;', [userId], function(err, rows) {
+    database.findOne({ user_id: userId }, function(err, user) {
       if(err) return callback(err)
-      if(rows.length == 0) return callback(error(404, 'user not found'))
+      if(!user) return callback(error(404, 'user not found'))
 
-      callback(null, rows[0])
+      callback(null, user)
     })
   }
 

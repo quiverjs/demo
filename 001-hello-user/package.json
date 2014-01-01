@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "quiver-error": "~0.1.0",
-    "quiver-stream-channel": "0.0.11",
-    "quiver-stream-convert": "0.0.8",
-    "quiver-module": "0.0.3"
+    "nedb": "~0.9.3",
+    "quiver-error": "0.1.x",
+    "quiver-module": "0.0.3",
+    "quiver-stream-channel": "0.0.x",
+    "quiver-stream-convert": "0.0.x"
   }
 }
