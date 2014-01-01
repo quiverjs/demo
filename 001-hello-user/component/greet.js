@@ -2,16 +2,16 @@
 'use strict'
 
 var helloHandlerBuilder = function(config, callback) {
-  var defaultGreet = 'hello'
+  var defaultGreet = config.defaultGreet || 'hello'
 
   var handler = function(args, text, callback) {
     var user = args.user
     var name = user.name
     var greet = user.greet || defaultGreet
 
-    var wordCount = text.split(' ').length
-
-    var greeting = greet + ', ' + name + '! You have submitted ' + wordCount + ' words.'
+    var greeting = greet + ', <b>' + name + '</b>!\n' +
+      'You have submitted the following text: ' + text
+    
     callback(null, greeting)
   }
 
@@ -24,6 +24,12 @@ var quiverComponents = [
     type: 'simple handler',
     inputType: 'text',
     outputType: 'text',
+    middlewares: [
+      'demo user permission filter',
+      'demo greet cache filter',
+      'demo escape html input filter',
+      'demo uppercase greet filter'
+    ],
     handlerBuilder: helloHandlerBuilder
   }
 ]

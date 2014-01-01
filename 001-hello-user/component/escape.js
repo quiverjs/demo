@@ -3,7 +3,21 @@
 
 var streamChannel = require('quiver-stream-channel')
 
-var toUppercaseHandlerBuilder = function(config, callback) {
+var tagsToReplace = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;'
+}
+
+function replaceTag(tag) {
+    return tagsToReplace[tag] || tag;
+}
+
+function htmlEscape(str) {
+    return str.replace(/[&<>]/g, replaceTag);
+}
+
+var escapeHtmlHandlerBuilder = function(config, callback) {
   var handler = function(args, inputStream, callback) {
     var channel = streamChannel.createStreamChannel()
     var writeStream = channel.writeStream
@@ -13,7 +27,9 @@ var toUppercaseHandlerBuilder = function(config, callback) {
         if(streamClosed) return writeStream.closeWrite(streamClosed.err)
 
         // Assume string in ASCII encoding
-        writeStream.write(data.toString().toUpperCase())
+        var escaped = htmlEscape(data.toString())
+
+        writeStream.write(escaped)
         doPipe()
       })
     }
@@ -25,18 +41,17 @@ var toUppercaseHandlerBuilder = function(config, callback) {
   callback(null, handler)
 }
 
-var uppercaseGreetFilter = function(config, handler, callback) {
-  var toUppercaseHandler = config.quiverStreamHandlers['demo to uppercase handler']
+var escapeHtmlInputFilter = function(config, handler, callback) {
+  var escapeHandler = config.quiverStreamHandlers['demo escape html handler']
 
   var filteredHandler = function(args, inputStreamable, callback) {
     var user = args.user
+    if(user.is_admin) return handler(args, inputStreamable, callback)
 
-    if(!user.want_uppercase_greet) return handler(args, inputStreamable, callback)
-
-    handler(args, inputStreamable, function(err, resultStreamable) {
+    escapeHandler({}, inputStreamable, function(err, transformedStreamable) {
       if(err) return callback(err)
 
-      toUppercaseHandler({}, resultStreamable, callback)
+      handler(args, transformedStreamable, callback)
     })
   }
 
@@ -45,25 +60,25 @@ var uppercaseGreetFilter = function(config, handler, callback) {
 
 var quiverComponents = [
   {
-    name: 'demo to uppercase handler',
+    name: 'demo escape html handler',
     type: 'simple handler',
     inputType: 'stream',
     outputType: 'stream',
-    handlerBuilder: toUppercaseHandlerBuilder
+    handlerBuilder: escapeHtmlHandlerBuilder
   },
   {
-    name: 'demo uppercase greet filter',
+    name: 'demo escape html input filter',
     type: 'stream filter',
     handleables: [
       {
-        handler: 'demo to uppercase handler',
+        handler: 'demo escape html handler',
         type: 'stream handler'
       }
     ],
     middleware: [
       'demo get user filter'
     ],
-    filter: uppercaseGreetFilter
+    filter: escapeHtmlInputFilter
   }
 ]
 

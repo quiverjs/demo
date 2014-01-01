@@ -7,7 +7,7 @@ var getUserHandlerBuilder = function(config, callback) {
   var database = config.database
 
   var handler = function(args, callback) {
-    var userId = args.userId
+    var userId = args.user_id
 
     database.query('SELECT * FROM user WHERE user_id=$1;', [userId], function(err, rows) {
       if(err) return callback(err)
@@ -24,7 +24,7 @@ var getUserFilterHandler = function(config, handler, callback) {
   var getUserHandler = config.quiverSimpleHandlers['demo get user handler']
 
   var filteredHandler = function(args, inputStreamable, callback) {
-    getUserHandler({ userId: args.userId }, function(err, user) {
+    getUserHandler({ user_id: args.user_id }, function(err, user) {
       if(err) return callback(err)
 
       args.user = user

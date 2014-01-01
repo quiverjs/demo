@@ -2,7 +2,7 @@
 'use strict'
 
 var mockEntries = {
-  johnsmith: {
+  john: {
     name: 'John Smith',
     greet: 'bonjour'
   },
@@ -12,7 +12,11 @@ var mockEntries = {
   },
   troll: {
     name: 'Anonymous Troll',
-    banned: true
+    is_banned: true
+  },
+  admin: {
+    name: 'Administrator',
+    is_admin: true
   }
 }
 
@@ -37,7 +41,7 @@ var mockDatabaseMiddleware = function(config, handlerBuilder, callback) {
 var quiverComponents = [
   {
     name: 'demo mock database middleware',
-    type: 'middleware',
+    type: 'handleable middleware',
     middleware: mockDatabaseMiddleware
   }
 ]
