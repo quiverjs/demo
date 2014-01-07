@@ -55,10 +55,11 @@ var mockDatabaseMiddleware = function(config, handlerBuilder, callback) {
 var helloHandlerBuilder = function(config, callback) {
   var handler = function(args, callback) {
     var user = args.user
+    var greet = user.greet || 'hello'
 
     if(user.is_banned) return callback(error(403, 'you are banned!'))
 
-    var greeting = 'hello, ' + user.name
+    var greeting = greet + ', ' + user.name
 
     if(user.want_uppercase_greet) greeting = greeting.toUpperCase()
 
