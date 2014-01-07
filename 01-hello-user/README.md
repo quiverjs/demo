@@ -6,7 +6,7 @@ This demo demonstrates the way to write a set of quiver components to serve diff
 
 ## Tutorial
 
-The main tutorial for this demo can be found at the [tutorial](tutorial) folder.
+The main tutorial for this demo can be found in the [tutorial](tutorial/01.md) folder.
 
 ## Reference
 
