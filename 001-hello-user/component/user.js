@@ -8,6 +8,7 @@ var getUserHandlerBuilder = function(config, callback) {
 
   var handler = function(args, callback) {
     var userId = args.user_id
+    if(!userId) return callback(error(404, 'user not found'))
 
     database.findOne({ user_id: userId }, function(err, user) {
       if(err) return callback(err)
@@ -24,7 +25,10 @@ var getUserFilterHandler = function(config, handler, callback) {
   var getUserHandler = config.quiverSimpleHandlers['demo get user handler']
 
   var filteredHandler = function(args, inputStreamable, callback) {
-    getUserHandler({ user_id: args.user_id }, function(err, user) {
+    var userId = args.user_id
+    if(!userId && args.path) userId = args.path.slice(1)
+
+    getUserHandler({ user_id: userId }, function(err, user) {
       if(err) return callback(err)
 
       args.user = user

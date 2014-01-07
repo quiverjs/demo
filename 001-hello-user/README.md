@@ -30,16 +30,10 @@ $ quiver-command . --config config.json --user_id john
 
 The user_id john can be replaced with any user in the mock user entries specified in the config. Since the command accepts input from STDIN, the user may type in anything and then press `Ctrl+D` to finishe the input.
 
-The script itself can also act as command line tool if it detect itself running as main. So the same command can also be run as follow:
-
-```bash
-$ node . --config config.json --user_id john
-```
-
 Alternatively a simple shell script is provided to run the demo simply as
 
 ```bash
-$ ./hello.sh john
+$ ./command.sh john
 ```
 
 ### Example Output
@@ -64,4 +58,47 @@ Error: user not found
 
 $ ./hello.sh troll
 Error: you are banned!
+```
+
+## Run as Server
+
+This demo can also be run as a HTTP server using [quiver-server](https://github.com/quiverjs/server), a tool for wrapping quiver components into http server. With `quiver-server` installed globally using npm, the demo can be run as follow:
+
+```bash
+$ quiver-server . --config config.json
+```
+
+Alternatively a simple shell script is provided to run the demo simply as
+
+```bash
+$ ./server.sh
+```
+
+By default the server listen at port 8080. The user id is extracted from the HTTP GET path, and the content is submitted through HTTP POST.
+
+### Example Output
+The server can be tested easily using `curl`:
+
+```bash
+$ curl http://localhost:8080/john --data "<b>hello world</b>"
+bonjour, <b>John Smith</b>!
+You have submitted the following text: &lt;b&gt;hello world&lt;/b&gt;
+
+$ curl http://localhost:8080/admin --data "<b>hello world</b>"
+hello, <b>Administrator</b>!
+You have submitted the following text: <b>hello world</b>
+
+$ curl http://localhost:8080/joker --data "hello world"
+HELLO, <B>MR JOKER</B>!
+YOU HAVE SUBMITTED THE FOLLOWING TEXT: HELLO WORLD
+
+$ curl -v http://localhost:8080/nobody
+> GET /troll HTTP/1.1
+> 
+< HTTP/1.1 404 Not Found
+
+$ curl -v http://localhost:8080/troll
+> GET /troll HTTP/1.1
+> 
+< HTTP/1.1 403 Forbidden
 ```

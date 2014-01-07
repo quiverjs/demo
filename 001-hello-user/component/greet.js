@@ -25,8 +25,8 @@ var quiverComponents = [
     inputType: 'text',
     outputType: 'text',
     middlewares: [
+      'demo get user filter',
       'demo user permission filter',
-      'demo greet cache filter',
       'demo escape html input filter',
       'demo uppercase greet filter'
     ],
