@@ -19,7 +19,7 @@ var quiverComponents = [
     name: 'demo user permission filter',
     type: 'stream filter',
     middlewares: [
-      'demo get user filter'
+      'demo user filter'
     ],
     filter: userPermissionFilter
   }

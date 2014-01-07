@@ -1,7 +1,8 @@
 
 'use strict'
 
-var error = require('quiver-error').error
+var Nedb = require('nedb')
+var mockUserEntries = require('./mock-user')
 
 var getUserHandlerBuilder = function(config, callback) {
   var database = config.database
@@ -21,25 +22,55 @@ var getUserHandlerBuilder = function(config, callback) {
   callback(null, handler)
 }
 
-var getUserFilter = function(config, handler, callback) {
+var mockDatabaseMiddleware = function(config, handlerBuilder, callback) {
+  var db = new Nedb()
+
+  db.insert(mockUserEntries, function(err) {
+    if(err) return callback(err)
+
+    config.database = db
+    handlerBuilder(config, callback)
+  })
+}
+
+var helloHandlerBuilder = function(config, callback) {
   var getUserHandler = config.quiverSimpleHandlers['demo get user handler']
 
-  var filteredHandler = function(args, inputStreamable, callback) {
+  var handler = function(args, callback) {
     var userId = args.user_id
-    if(!userId && args.path) userId = args.path.slice(1)
 
     getUserHandler({ user_id: userId }, function(err, user) {
       if(err) return callback(err)
 
-      args.user = user
-      handler(args, inputStreamable, callback)
+      var greeting = 'hello, ' + user.name
+      callback(null, greeting)
     })
   }
 
-  callback(null, filteredHandler)
+  callback(null, handler)
 }
 
 var quiverComponents = [
+  {
+    name: 'demo hello handler',
+    type: 'simple handler',
+    inputType: 'void',
+    outputType: 'text',
+    handleables: [
+      {
+        handler: 'demo get user handler',
+        type: 'simple handler',
+        inputType: 'void',
+        outputType: 'json',
+      }
+    ],
+    handlerBuilder: helloHandlerBuilder
+  },
+  {
+    name: 'demo mock database middleware',
+    type: 'handleable middleware',
+    middleware: mockDatabaseMiddleware
+  },
   {
     name: 'demo get user handler',
     type: 'simple handler',
@@ -49,19 +80,6 @@ var quiverComponents = [
       'demo mock database middleware'
     ],
     handlerBuilder: getUserHandlerBuilder
-  },
-  {
-    name: 'demo user filter',
-    type: 'stream filter',
-    handleables: [
-      {
-        handler: 'demo get user handler',
-        type: 'simple handler',
-        inputType: 'void',
-        outputType: 'json',
-      }
-    ],
-    filter: getUserFilter
   }
 ]
 

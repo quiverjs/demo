@@ -33,7 +33,7 @@ The user_id john can be replaced with any user in the mock user entries specifie
 Alternatively a simple shell script is provided to run the demo simply as
 
 ```bash
-$ ./command.sh john
+$ bin/command.sh john
 ```
 
 ### Example Output
@@ -41,22 +41,22 @@ $ ./command.sh john
 Here are some examples of the expected output, with the program's STDIN fed from echo:
 
 ```bash
-$ echo "<b>hello world</b>" | ./hello.sh john
+$ echo "<b>hello world</b>" | bin/command.sh john
 bonjour, <b>John Smith</b>!
 You have submitted the following text: &lt;b&gt;hello world&lt;/b&gt;
 
-$ echo "<b>hello world</b>" | ./hello.sh admin
+$ echo "<b>hello world</b>" | bin/command.sh admin
 hello, <b>Administrator</b>!
 You have submitted the following text: <b>hello world</b>
 
-$ echo "hello world" | ./hello.sh joker
+$ echo "hello world" | bin/command.sh joker
 HELLO, <B>MR JOKER</B>!
 YOU HAVE SUBMITTED THE FOLLOWING TEXT: HELLO WORLD
 
-$ ./hello.sh nobody
+$ bin/command.sh nobody
 Error: user not found
 
-$ ./hello.sh troll
+$ bin/command.sh troll
 Error: you are banned!
 ```
 

@@ -76,7 +76,7 @@ var quiverComponents = [
       }
     ],
     middleware: [
-      'demo get user filter'
+      'demo user filter'
     ],
     filter: escapeHtmlInputFilter
   }
