@@ -3,12 +3,13 @@
   "version": "0.0.0",
   "main": "index.js",
   "dependencies": {
-    "nedb": "~0.9.3",
-    "quiver-error": "0.1.x",
-    "quiver-module": "0.0.x",
-    "quiver-command": "0.0.x",
-    "quiver-server": "0.0.x",
-    "quiver-stream-channel": "0.0.x",
-    "quiver-stream-convert": "0.0.x"
+    "nedb": "~0.10.4",
+    "quiver-error": "~0.1.0",
+    "quiver-module": "~0.1.2",
+    "quiver-server": "~0.1.0",
+    "quiver-command": "~0.1.0",
+    "quiver-pipe-stream": "~0.0.2",
+    "quiver-stream-channel": "~0.0.12",
+    "quiver-stream-convert": "~0.0.11"
   }
 }

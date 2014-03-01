@@ -1,3 +1,5 @@
 #!/bin/bash
 
-node_modules/.bin/quiver-server . --config config.json
+cd `dirname $0`
+
+../node_modules/.bin/quiver-server .. --config ../config.json

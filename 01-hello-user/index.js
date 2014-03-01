@@ -1,15 +1,11 @@
 
 'use strict'
 
-var moduleLib = require('quiver-module').enterContext(require)
+var moduleLib = require('quiver-module')
 var commandLib = require('quiver-command')
 
-var quiverModule = moduleLib.exportFromManifest('./package.json')
+var quiverModule = moduleLib.exportFromManifestSync(require, './package.json')
 
 module.exports = {
   quiverModule: quiverModule
-}
-
-if(require.main == module) {
-  commandLib.runModuleAsCommand(quiverModule)
 }

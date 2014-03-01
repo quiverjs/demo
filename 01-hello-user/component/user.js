@@ -47,7 +47,7 @@ var quiverComponents = [
     outputType: 'json',
     middlewares: [
       'demo mock database middleware',
-      'demo user cache filter'
+      //'demo user cache filter'
     ],
     handlerBuilder: getUserHandlerBuilder
   },
