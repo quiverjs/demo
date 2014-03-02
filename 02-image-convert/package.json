@@ -1,0 +1,15 @@
+{
+  "name": "demo-hello-user",
+  "version": "0.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "quiver-error": "~0.1.0",
+    "quiver-filter": "~0.1.1",
+    "quiver-module": "~0.1.2",
+    "quiver-server": "~0.1.0",
+    "quiver-component": "~0.2.2",
+    "quiver-file-component": "~0.2.0",
+    "quiver-cache-component": "~0.0.1",
+    "quiver-command-component": "~0.0.2"
+  }
+}
