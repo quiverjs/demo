@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<head>
+  <title>Quiver.js Demo</title>
+  <link rel="stylesheet" href="/css/stylesheet.css">
+</head>
+
+<body>
+  {{{body}}}
+  <div id="footer"></div>
+</body>
+
+<script src="/js/hello.js"></script>
+</html>

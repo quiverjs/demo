@@ -1,18 +1,13 @@
 'use strict'
 
 var pathLib = require('path')
+var tempPathBuilder = require('../lib/temp').tempPathBuilder
 
 var imageResizeCommandArgsExtractor = function(args, inputPath, outputPath, callback) {
-  var size = args.size || 200
+  var size = args.size || 300
 
   var commandArgs = ['convert', inputPath, '-resize', size, outputPath]
   callback(null, commandArgs)
-}
-
-var tempPathBuilder = function(callback) {
-  var tempId = '' + (new Date()).getTime() + '.tmp'
-  var path = pathLib.join(__dirname, '../temp', tempId)
-  callback(null, path)
 }
 
 var quiverComponents = [
@@ -23,20 +18,32 @@ var quiverComponents = [
       commandArgsExtractor: imageResizeCommandArgsExtractor,
       inputTempPathBuilder: tempPathBuilder,
       outputTempPathBuilder: tempPathBuilder,
-      resultContentType: 'image/jpeg'
     },
+    resultContentType: 'image/jpeg',
     handler: 'quiver file convert command handler'
   },
   {
-    name: 'demo image gallery handler',
+    name: 'demo image thumbnail handler',
     type: 'stream pipeline',
     middlewares: [
+    
       'quiver memory cache filter'
     ],
     pipeline: [
       'quiver file directory handler',
       'demo resize image handler'
-    ]
+    ],
+    configAlias: {
+      dirPath: 'imageDirPath'
+    }
+  },
+  {
+    name: 'demo static image handler',
+    type: 'stream handler',
+    configAlias: {
+      dirPath: 'imageDirPath'
+    },
+    handler: 'quiver file directory handler'
   }
 ]
 
