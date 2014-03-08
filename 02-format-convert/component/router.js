@@ -34,6 +34,12 @@ var quiverComponents = [
         regex: /^\/post(\/.+)$/,
         matchFields: ['path'],
         handler: 'demo post page handler'
+      },
+      {
+        routeType: 'regex',
+        regex: /^\/static(\/.+)$/,
+        matchFields: ['path'],
+        handler: 'quiver file directory handler'
       }
     ]
   },

@@ -3,16 +3,50 @@
   <title>Quiver.js Demo</title>
   <link rel="stylesheet" href="/css/stylesheet.css">
   <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.2/pure-min.css">
+  <link rel="stylesheet" href="http://purecss.io/combo/1.11.5?/css/main-grid.css&/css/layouts/blog.css">
 </head>
 
 <body>
-  <div class="pure-g">
-    <div class="pure-u-1-3">
-    {{{body}}}
+  <div id="layout" class="pure-g">
+    <div class="sidebar pure-u-1 pure-u-med-1-4">
+        <div class="header">
+            <hgroup>
+                <h1 class="brand-title">Quiver.js Demo</h1>
+                <h2 class="brand-tagline">Demo cat picture gallery</h2>
+            </hgroup>
+        </div>
     </div>
-    <div class="pure-u-1-3" id="footer"></div>
-  <div class="pure-g">
+
+    <div class="content pure-u-1 pure-u-med-3-4">
+      <div>
+        <div class="posts">
+         <h1 class="content-subhead">Main Content</h1>
+        {{{body}}}
+        </div>
+
+        <div class="posts">
+          <h1 class="content-subhead">Less CSS Example</h1>
+          <div>
+            <p>
+              The shapes below are rendered using <a href="/css/stylesheet.css">CSS</a> generated from <a href="/static/less/stylesheet.less">LESS</a>. The Less source is originally obtained from <a href="http://verekia.com/less-css/dont-read-less-css-tutorial-highly-addictive">verekia's blog</a>.
+            </p>
+          </div>
+          <div id="shapes"></div>
+          <div>
+            <p>
+              The CSS constructs are inserted using jQuery and the client JS file is compiled using Browserify and Uglify. Here are both the <a href="/static/js/hello.js">original</a> and <a href="/js/hello.js">compiled</a> js files.
+            </p>
+            <p>
+              Other than the main content area, the page including this footer post is rendered from a <a href="/static/template/main.html.template">template</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
 </body>
 
 <script src="/js/hello.js"></script>
+<script src="http://yui.yahooapis.com/3.14.1/build/yui/yui-min.js"></script>
 </html>

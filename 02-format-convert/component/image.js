@@ -4,7 +4,7 @@ var pathLib = require('path')
 var tempPathBuilder = require('../lib/temp').tempPathBuilder
 
 var imageResizeCommandArgsExtractor = function(args, inputPath, outputPath, callback) {
-  var size = args.size || 300
+  var size = args.size || 250
 
   var commandArgs = ['convert', inputPath, '-resize', size, outputPath]
   callback(null, commandArgs)
