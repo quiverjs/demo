@@ -1,47 +1,28 @@
 'use strict'
 
-var fs = require('fs')
 var mustache = require('mustache')
-var streamConvert = require('quiver-stream-convert')
 
-var templateRenderHandlerBuilder = function(config, callback) {
-  var templatePath = config.templatePath
+var mustacheTemplateCompiler = function(templateText, callback) {
+  mustache.parse(templateText)
 
-  fs.readFile(templatePath, 'utf-8', function(err, template) {
-    if(err) return callback(err)
+  var compiledTemplate = function(args, callback) {
+    var result = mustache.render(templateText, args)
     
-    mustache.parse(template)
+    callback(null, result)
+  }
 
-    var handler = function(args, body, callback) {
-      var templateArgs = {
-        args: args,
-        body: body
-      }
-
-      var result = mustache.render(template, templateArgs)
-
-      callback(null, result)
-    }
-
-    callback(null, handler)
-  })
+  callback(null, compiledTemplate)
 }
 
 var quiverComponents = [
   {
-    name: 'demo template render handler',
-    type: 'simple handler',
-    inputType: 'text',
-    outputType: 'text',
+    name: 'demo mustache template render handler',
+    type: 'stream handler',
+    configOverride: {
+      templateCompiler: mustacheTemplateCompiler
+    },
     resultContentType: 'text/html',
-    configParam: [
-      {
-        key: 'templatePath',
-        valueType: 'string',
-        required: true
-      }
-    ],
-    handlerBuilder: templateRenderHandlerBuilder
+    handler: 'quiver template convert handler'
   }
 ]
 

@@ -10,16 +10,17 @@
     "uglify-js": "~2.4.12",
     "browserify": "~3.32.0",
     "quiver-copy": "~0.1.4",
-    "quiver-config": "~0.0.7",
     "quiver-error": "~0.1.0",
+    "quiver-config": "~0.0.7",
     "quiver-filter": "~0.1.2",
     "quiver-module": "~0.1.2",
     "quiver-server": "~0.1.0",
     "quiver-command": "~0.1.0",
     "quiver-component": "~0.2.5",
     "quiver-file-component": "~0.2.0",
-    "quiver-cache-component": "~0.0.1",
     "quiver-stream-convert": "~0.0.11",
-    "quiver-command-component": "~0.0.2"
+    "quiver-cache-component": "~0.0.1",
+    "quiver-command-component": "~0.0.2",
+    "quiver-template-component": "~0.0.1"
   }
 }

@@ -26,7 +26,7 @@ var quiverComponents = [
     pipeline: [
       'quiver file directory handler',
       'demo markdown convert handler',
-      'demo template render handler'
+      'demo mustache template render handler'
     ],
     configAlias: {
       dirPath: 'postDirPath'
