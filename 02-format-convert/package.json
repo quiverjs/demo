@@ -17,10 +17,11 @@
     "quiver-server": "~0.1.0",
     "quiver-command": "~0.1.0",
     "quiver-component": "~0.2.5",
+    "quiver-subrequest": "~0.0.4",
     "quiver-file-component": "~0.2.0",
     "quiver-stream-convert": "~0.0.11",
     "quiver-cache-component": "~0.0.1",
-    "quiver-command-component": "~0.0.2",
+    "quiver-command-component": "~0.0.4",
     "quiver-template-component": "~0.0.1"
   }
 }

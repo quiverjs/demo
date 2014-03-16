@@ -6,6 +6,11 @@ var quiverComponents = [
     type: 'route list',
     routeList: [
       {
+        routeType: 'static',
+        path: '/',
+        handler: 'demo hello handler'
+      },
+      {
         routeType: 'regex',
         regex: /^\/thumbnails(\/.+)$/,
         matchFields: ['path'],

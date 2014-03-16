@@ -2,4 +2,4 @@
 
 cd `dirname $0`/..
 
-node_modules/.bin/quiver-server . --main 'demo resize image handler'
+node_modules/.bin/quiver-server . --config ./config.js --main 'demo resize image handler'

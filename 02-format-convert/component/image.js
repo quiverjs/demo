@@ -16,8 +16,7 @@ var quiverComponents = [
     type: 'stream handler',
     configOverride: {
       commandArgsExtractor: imageResizeCommandArgsExtractor,
-      inputTempPathBuilder: tempPathBuilder,
-      outputTempPathBuilder: tempPathBuilder,
+      tempPathBuilder: tempPathBuilder
     },
     resultContentType: 'image/jpeg',
     handler: 'quiver file convert command handler'
@@ -26,7 +25,6 @@ var quiverComponents = [
     name: 'demo image thumbnail handler',
     type: 'stream pipeline',
     middlewares: [
-    
       'quiver memory cache filter'
     ],
     pipeline: [

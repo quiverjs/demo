@@ -15,7 +15,7 @@ var quiverComponents = [
     type: 'simple handler',
     inputType: 'text',
     outputType: 'text',
-    resultContentType: 'application/javascript',
+    resultContentType: 'text/html',
     handler: markdownConvertHandler
   },
   {
